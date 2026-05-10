@@ -19,7 +19,7 @@ namespace TransportManagementSystem.Controller
         public async Task<IActionResult> AddVehicle(Vehicle vehicle)
         {
             await DbContext.AddAsync(vehicle);
-                    await DbContext.SaveChangesAsync();
+            await DbContext.SaveChangesAsync();
 
             return Ok("Vehicle add successfuly");
 
@@ -31,5 +31,48 @@ namespace TransportManagementSystem.Controller
             var vr = await DbContext.Vehicles.ToListAsync();
             return Ok(vr);
         }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> EditVehicle(int id , Vehicle vehicle)
+        {
+            var vr = await DbContext.Vehicles.FindAsync(id);
+            if (vr == null)
+            {
+                return NotFound("vehicle is not found");
+            }
+
+         
+                vr.VehicleNumber = vehicle.VehicleNumber;
+                vr.vehicleType = vehicle.vehicleType;
+                vr.IsActive = vehicle.IsActive;
+                await DbContext.SaveChangesAsync();
+                return Ok("Vehicle is updated");
+           
+        }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult>DeleteVehicle(int id)
+        {
+            var vr = await DbContext.Vehicles.FindAsync(id);
+            if(vr == null)
+            {
+                return NotFound("this is not exit");
+            }
+             DbContext.Vehicles.Remove(vr);
+            await DbContext.SaveChangesAsync();
+            return Ok(vr.VehicleNumber+"Deleted");
+        }
+        [HttpGet("{vehicleName}")]
+        public async Task<IActionResult> SearchbyName( string vehicleName)
+        {
+            var vr = await DbContext.Vehicles.FirstOrDefaultAsync(x => x.VehicleNumber.ToLower() ==vehicleName.ToLower() );
+            if(vr == null)
+            {
+                return NotFound( vehicleName+" "+"this vehicle is not exit");
+            }
+            return Ok(vr);
+        }
     }
+
+    
+
+   
 }
