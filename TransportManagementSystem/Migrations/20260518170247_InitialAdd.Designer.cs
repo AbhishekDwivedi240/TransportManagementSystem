@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TransportManagementSystem.Data;
 
@@ -10,9 +11,11 @@ using TransportManagementSystem.Data;
 namespace TransportManagementSystem.Migrations
 {
     [DbContext(typeof(ApDb))]
-    partial class ApDbModelSnapshot : ModelSnapshot
+    [Migration("20260518170247_InitialAdd")]
+    partial class InitialAdd
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -8,5 +8,6 @@ namespace TransportManagementSystem.Data
         public ApDb(DbContextOptions<ApDb>options):base(options) { }
 
         public DbSet<Vehicle> Vehicles { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }

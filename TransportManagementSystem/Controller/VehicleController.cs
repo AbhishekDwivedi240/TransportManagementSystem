@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TransportManagementSystem.Data;
@@ -8,6 +9,7 @@ namespace TransportManagementSystem.Controller
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class VehicleController : ControllerBase
     {
         private readonly ApDb DbContext;
